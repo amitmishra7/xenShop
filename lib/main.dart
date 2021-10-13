@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xen_shop/bloc/category/category_bloc.dart';
+import 'package:xen_shop/bloc/products/product_bloc.dart';
 import 'package:xen_shop/components/styles/colors_theme.dart';
 import 'package:xen_shop/components/styles/strings.dart';
 import 'package:xen_shop/repository/category/category_repository.dart';
+import 'package:xen_shop/repository/product/product_repository.dart';
 import 'components/routes/route_paths.dart';
 import 'components/routes/router.dart' as AppRouter;
 
@@ -11,6 +13,9 @@ void main() {
   runApp(MultiBlocProvider(providers: [
     BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(CategoryRepository()),
+    ),
+    BlocProvider<ProductBloc>(
+      create: (context) => ProductBloc(ProductRepository()),
     ),
   ], child: MyApp()));
 }

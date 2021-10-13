@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xen_shop/bloc/category/category_event.dart';
 import 'package:xen_shop/bloc/category/category_state.dart';
+import 'package:xen_shop/models/error/error_model.dart';
 import 'package:xen_shop/repository/category/category_repository.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
@@ -15,16 +17,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   Stream<CategoryState> mapEventToState(
     CategoryEvent event,
   ) async* {
-    // Emitting a state from the asynchronous generator
     yield CategoryLoading();
-    // Branching the executed logic by checking the event type
     if (event is GetCategory) {
-      // Emit either Loaded or Error
       try {
         final categories = await repository.fetchCategoryList();
         yield CategoryLoaded(categories);
-      } on NetworkError {
-        yield CategoryError("Network Error");
+      } on NetworkError catch (networkError) {
+        yield CategoryError(repository.parseError(networkError.message));
       }
     }
   }

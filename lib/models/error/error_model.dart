@@ -22,3 +22,9 @@ class ErrorModel {
     return data;
   }
 }
+
+class NetworkError extends Error {
+  String message;
+  NetworkError(this.message);
+}
+
