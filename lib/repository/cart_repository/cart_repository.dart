@@ -8,12 +8,10 @@ import 'package:xen_shop/repository/base_repository/base_repository.dart';
 class CartRepository extends BaseRepository {
   RemoteDateSource remoteDateSource = RemoteDateSource();
 
-  Future<List<CartModel>> fetchCart() async {
+  Future<CartModel> fetchCart() async {
     try {
       Response response = await remoteDateSource.getCart();
-      return response.data
-          .map<CartModel>((json) => CartModel.fromJson(json))
-          .toList();
+      return CartModel.fromJson(response.data);
     } catch (err) {
       throw NetworkError(err);
     }

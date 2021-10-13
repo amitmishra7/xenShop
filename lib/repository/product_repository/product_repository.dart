@@ -8,7 +8,7 @@ import 'package:xen_shop/models/error/error_model.dart';
 import 'package:xen_shop/models/product/product_model.dart';
 import 'package:xen_shop/repository/base_repository/base_repository.dart';
 
-class ProductRepository extends BaseRepository{
+class ProductRepository extends BaseRepository {
   RemoteDateSource remoteDateSource = RemoteDateSource();
 
   Future<List<ProductModel>> fetchProducts(String category) async {
@@ -17,6 +17,16 @@ class ProductRepository extends BaseRepository{
       return response.data
           .map<ProductModel>((json) => ProductModel.fromJson(json))
           .toList();
+    } catch (err) {
+      throw NetworkError(err);
+    }
+  }
+
+  Future<ProductModel> fetchProductDetails(int id) async {
+    try {
+      Response response = await remoteDateSource.getProductDetails(id);
+      ProductModel product = ProductModel.fromJson(response.data);
+      return product;
     } catch (err) {
       throw NetworkError(err);
     }

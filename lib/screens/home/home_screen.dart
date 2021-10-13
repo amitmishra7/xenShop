@@ -35,11 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
-
         onPressed: () {
           Navigator.pushNamed(context, RoutePaths.Cart);
         },
-        child: Icon(Icons.shopping_cart,color: Colors.white,),
+        child: Icon(
+          Icons.shopping_cart,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -118,8 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCategoryThumbnailItem({String categoryName, String imageUrl}) {
     var imgUrl = 'assets/$imageUrl.jpg';
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, RoutePaths.Products, arguments: categoryName);
+      onTap: () {
+        Navigator.pushNamed(context, RoutePaths.Products,
+            arguments: categoryName);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var imgUrl = 'assets/${imageUrl}_banner.jpg';
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, RoutePaths.Products, arguments: categoryName);
+        Navigator.pushNamed(context, RoutePaths.Products,
+            arguments: categoryName);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
