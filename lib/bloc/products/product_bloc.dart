@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xen_shop/bloc/products/product_event.dart';
 import 'package:xen_shop/bloc/products/product_state.dart';
 import 'package:xen_shop/models/error/error_model.dart';
-import 'package:xen_shop/repository/product/product_repository.dart';
+import 'package:xen_shop/repository/product_repository/product_repository.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductRepository repository;

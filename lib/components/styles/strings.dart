@@ -3,6 +3,7 @@
 class Strings {
   static const String appName = "Xen Shop";
   static const String home = "Home";
+  static const String cart = "My Cart";
 
   ///Error Message
   static const String badGateWayError =
@@ -21,4 +22,10 @@ class Strings {
       "Sorry! Your request timed out. Please try again.";
   static const String unexpectedError =
       "Ops! Something went wrong unexpectedly. Please try again.";
+
+  static String cartEmpty = 'No items in cart..!';
+  static String deleteAlert = "Are you sure you wish to remove this item ?";
+  static String cancel = "CANCEL";
+  static String delete = "DELETE";
+  static String confirm = "Confirm";
 }

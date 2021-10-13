@@ -15,7 +15,7 @@ import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
 import 'package:xen_shop/components/widgets/product_item.dart';
 import 'package:xen_shop/models/category/category.dart';
-import 'package:xen_shop/models/product/product.dart';
+import 'package:xen_shop/models/product/product_model.dart';
 
 class ProductsScreen extends StatefulWidget {
   final String category;
@@ -74,7 +74,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  Widget _buildProductListing(List<Product> products) {
+  Widget _buildProductListing(List<ProductModel> products) {
     return ListView.separated(
         separatorBuilder: (context, index) => SizedBox(
               width: 10,

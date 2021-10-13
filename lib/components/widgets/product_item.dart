@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
-import 'package:xen_shop/models/product/product.dart';
+import 'package:xen_shop/models/product/product_model.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
 
-  ProductItem({this.product});
+  /// default value as false to hide increment decrement icons
+  final bool isFromCart;
+
+  ProductItem({this.product, this.isFromCart = false});
 
   @override
   Widget build(BuildContext context) {
@@ -58,21 +61,23 @@ class ProductItem extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: Colors.black),
                     ),
-                    RatingBar.builder(
-                      initialRating: product.rating.rate,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      unratedColor: Colors.amber.withAlpha(50),
-                      itemCount: 5,
-                      itemSize: 20.0,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      updateOnDrag: true,
-                    )
+                    !isFromCart
+                        ? RatingBar.builder(
+                            initialRating: product.rating.rate,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            unratedColor: Colors.amber.withAlpha(50),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            updateOnDrag: true,
+                          )
+                        : Container(),
                   ],
                 ),
               ],
@@ -86,5 +91,4 @@ class ProductItem extends StatelessWidget {
       ],
     );
   }
-
 }
