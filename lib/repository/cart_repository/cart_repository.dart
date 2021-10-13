@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:xen_shop/components/api/remote_data_source.dart';
 import 'package:xen_shop/models/cart/cart_model.dart';
@@ -14,6 +13,16 @@ class CartRepository extends BaseRepository {
       return CartModel.fromJson(response.data);
     } catch (err) {
       throw NetworkError(err);
+    }
+  }
+
+  Future<void> addToCart(
+      {Map<String, dynamic> data, Function onSuccess, Function onError}) async {
+    try {
+      await remoteDateSource.addToCart(data);
+      onSuccess();
+    } catch (err) {
+      onError();
     }
   }
 }

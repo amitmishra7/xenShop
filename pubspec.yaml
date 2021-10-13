@@ -18,6 +18,8 @@ dependencies:
   flutter_bloc: ^7.3.0
   equatable: ^2.0.3
   flutter_rating_bar: ^4.0.0
+  toast: ^0.1.5
+  another_flushbar: ^1.10.24
 
 dev_dependencies:
   flutter_test:

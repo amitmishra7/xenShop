@@ -13,18 +13,17 @@ import 'components/routes/route_paths.dart';
 import 'components/routes/router.dart' as AppRouter;
 
 void main() {
-  ProductRepository productRepository = ProductRepository();
+  CartRepository cartRepository = CartRepository();
   runApp(MultiBlocProvider(providers: [
     BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(CategoryRepository()),
     ),
     BlocProvider<ProductBloc>(
-      create: (context) => ProductBloc(productRepository),
+      create: (context) => ProductBloc(ProductRepository()),
     ),
     BlocProvider<CartBloc>(
-      create: (context) => CartBloc(CartRepository()),
+      create: (context) => CartBloc(cartRepository),
     ),
-
   ], child: MyApp()));
 }
 
