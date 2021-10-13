@@ -25,4 +25,16 @@ class RemoteDateSource {
       return Future.error(err.toString());
     }
   }
+
+
+  ///Get cart list
+  Future<Response> getCart() async {
+    try {
+      Response response = await apiRequest.get(endPoint: "carts");
+      print("Dio response-- ${response.data}");
+      return Future.value(response);
+    } catch (err) {
+      return Future.error(err.toString());
+    }
+  }
 }

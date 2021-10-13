@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xen_shop/bloc/category/category_event.dart';
 import 'package:xen_shop/bloc/category/category_state.dart';
 import 'package:xen_shop/models/error/error_model.dart';
-import 'package:xen_shop/repository/category/category_repository.dart';
+import 'package:xen_shop/repository/category_repository/category_repository.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryRepository repository;

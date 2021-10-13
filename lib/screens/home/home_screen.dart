@@ -34,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(Strings.appName),
       ),
       body: _buildBody(),
+      floatingActionButton: FloatingActionButton(
+
+        onPressed: () {
+          Navigator.pushNamed(context, RoutePaths.Cart);
+        },
+        child: Icon(Icons.shopping_cart,color: Colors.white,),
+      ),
     );
   }
 

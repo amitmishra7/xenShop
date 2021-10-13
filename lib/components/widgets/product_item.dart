@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
-import 'package:xen_shop/models/product/product.dart';
+import 'package:xen_shop/models/product/product_model.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
 
   ProductItem({this.product});
 

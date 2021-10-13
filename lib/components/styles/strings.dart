@@ -3,6 +3,7 @@
 class Strings {
   static const String appName = "Xen Shop";
   static const String home = "Home";
+  static const String cart = "My Cart";
 
   ///Error Message
   static const String badGateWayError =

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Product extends Equatable {
+class ProductModel extends Equatable {
   int id;
   String title;
   double price;
@@ -9,7 +9,7 @@ class Product extends Equatable {
   String image;
   Rating rating;
 
-  Product(
+  ProductModel(
       {this.id,
       this.title,
       this.price,
@@ -18,7 +18,7 @@ class Product extends Equatable {
       this.image,
       this.rating});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     price = json['price'];
