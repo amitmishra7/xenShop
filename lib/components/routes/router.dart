@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xen_shop/components/routes/route_paths.dart';
 import 'package:xen_shop/screens/home/home_screen.dart';
+import 'package:xen_shop/screens/products/products_screen.dart';
 import 'package:xen_shop/screens/splashscreen/splashscreen.dart';
 
 class Router {
@@ -11,6 +12,8 @@ class Router {
         return CupertinoPageRoute(builder: (_) => SplashScreen());
       case RoutePaths.Home:
         return CupertinoPageRoute(builder: (_) => HomeScreen());
+      case RoutePaths.Products:
+        return CupertinoPageRoute(builder: (_) => ProductsScreen(settings.arguments));
       default:
         {
           return CupertinoPageRoute(

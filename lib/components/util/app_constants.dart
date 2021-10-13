@@ -7,4 +7,5 @@ class AppConstants {
   static String baseUrl = "https://fakestoreapi.com/";
   static int connectionTimeout = 30000;
   static int receiveTimeout = 30000;
+
 }

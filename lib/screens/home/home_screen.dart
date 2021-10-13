@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xen_shop/bloc/category/category_bloc.dart';
 import 'package:xen_shop/bloc/category/category_event.dart';
 import 'package:xen_shop/bloc/category/category_state.dart';
+import 'package:xen_shop/components/routes/route_paths.dart';
 import 'package:xen_shop/components/styles/strings.dart';
 import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
@@ -82,7 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount: categories.length,
           itemBuilder: (BuildContext context, int index) {
             return _buildCategoryBannerItem(
-                categories[index].categoryName.replaceAll("'s clothing", ""));
+                categoryName: categories[index].categoryName,
+                imageUrl: categories[index]
+                    .categoryName
+                    .replaceAll("'s clothing", ""));
           }),
     );
     ;
@@ -90,59 +94,73 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoryThumbnail(List<Category> categories) {
     return ListView.separated(
-      separatorBuilder: (context, index) => SizedBox(width: 10,),
+        separatorBuilder: (context, index) => SizedBox(
+              width: 10,
+            ),
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(8),
         itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           return _buildCategoryThumbnailItem(
-              categories[index].categoryName.replaceAll("'s clothing", ""));
+              categoryName: categories[index].categoryName,
+              imageUrl:
+                  categories[index].categoryName.replaceAll("'s clothing", ""));
         });
   }
 
-  Widget _buildCategoryThumbnailItem(String categoryName) {
-    var imageUrl = 'assets/$categoryName.jpg';
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 100,
-          child: ImageLoader.withImage(
-              imageUrl: imageUrl,
-              imageType: ImageType.ASSET,
-              showCircleImage: false,
-              roundCorners: false),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCategoryBannerItem(String categoryName) {
-    var imageUrl = 'assets/${categoryName}_banner.jpg';
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          categoryName.toUpperCase(),
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 5),
-          child: Container(
-            height: 225,
-            width: double.infinity,
+  Widget _buildCategoryThumbnailItem({String categoryName, String imageUrl}) {
+    var imgUrl = 'assets/$imageUrl.jpg';
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, RoutePaths.Products, arguments: categoryName);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 100,
             child: ImageLoader.withImage(
-                boxFit: BoxFit.cover,
-                imageUrl: imageUrl,
+                imageUrl: imgUrl,
                 imageType: ImageType.ASSET,
                 showCircleImage: false,
                 roundCorners: false),
           ),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryBannerItem({String categoryName, String imageUrl}) {
+    var imgUrl = 'assets/${imageUrl}_banner.jpg';
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, RoutePaths.Products, arguments: categoryName);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            categoryName.toUpperCase(),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 5),
+            child: Container(
+              height: 225,
+              width: double.infinity,
+              child: ImageLoader.withImage(
+                  boxFit: BoxFit.cover,
+                  imageUrl: imgUrl,
+                  imageType: ImageType.ASSET,
+                  showCircleImage: false,
+                  roundCorners: false),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
