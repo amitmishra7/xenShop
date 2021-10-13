@@ -1,77 +1,148 @@
+import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xen_shop/bloc/category/category_bloc.dart';
+import 'package:xen_shop/bloc/category/category_event.dart';
+import 'package:xen_shop/bloc/category/category_state.dart';
 import 'package:xen_shop/components/styles/strings.dart';
+import 'package:xen_shop/components/util/app_constants.dart';
+import 'package:xen_shop/components/widgets/image_loader.dart';
+import 'package:xen_shop/models/category/category.dart';
 
 class HomeScreen extends StatefulWidget {
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
+  CategoryBloc categoryBloc;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    categoryBloc = BlocProvider.of<CategoryBloc>(context);
+    categoryBloc.add(GetCategory());
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(Strings.appName),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return Padding(
+      padding: EdgeInsets.all(12),
+      child: _buildCategoryList(),
+    );
+  }
+
+  Widget _buildCategoryList() {
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      builder: (context, state) {
+        if (state is CategoryInitial) {
+          return Container();
+        } else if (state is CategoryLoading) {
+          return Center(
+            child: SizedBox(
+                height: 25, width: 25, child: CircularProgressIndicator()),
+          );
+        } else if (state is CategoryLoaded) {
+          return Column(
+            children: [
+              Container(
+                height: 125,
+                child: _buildCategoryThumbnail(state.categories),
+              ),
+              _buildCategoryBanner(state.categories),
+            ],
+          );
+        } else if (state is CategoryError) {
+          return Text(Strings.networkError);
+        } else {
+          return Text(Strings.somethingWentWrong);
+        }
+      },
+    );
+  }
+
+  Widget _buildCategoryBanner(List<Category> categories) {
+    return Expanded(
+      child: ListView.separated(
+          separatorBuilder: (context, index) => SizedBox(
+                height: 15,
+              ),
+          padding: const EdgeInsets.all(8),
+          itemCount: categories.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildCategoryBannerItem(
+                categories[index].categoryName.replaceAll("'s clothing", ""));
+          }),
+    );
+    ;
+  }
+
+  Widget _buildCategoryThumbnail(List<Category> categories) {
+    return ListView.separated(
+      separatorBuilder: (context, index) => SizedBox(width: 10,),
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.all(8),
+        itemCount: categories.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildCategoryThumbnailItem(
+              categories[index].categoryName.replaceAll("'s clothing", ""));
+        });
+  }
+
+  Widget _buildCategoryThumbnailItem(String categoryName) {
+    var imageUrl = 'assets/$categoryName.jpg';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 100,
+          child: ImageLoader.withImage(
+              imageUrl: imageUrl,
+              imageType: ImageType.ASSET,
+              showCircleImage: false,
+              roundCorners: false),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ],
+    );
+  }
+
+  Widget _buildCategoryBannerItem(String categoryName) {
+    var imageUrl = 'assets/${categoryName}_banner.jpg';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          categoryName.toUpperCase(),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Container(
+            height: 225,
+            width: double.infinity,
+            child: ImageLoader.withImage(
+                boxFit: BoxFit.cover,
+                imageUrl: imageUrl,
+                imageType: ImageType.ASSET,
+                showCircleImage: false,
+                roundCorners: false),
+          ),
+        ),
+      ],
     );
   }
 }
