@@ -35,4 +35,9 @@ class Strings {
   static String placeOrder = 'Place Order';
 
   static var addedToCart = "Your Order Has Placed Successfully";
+
+  static String productDetails = "Product Details";
+
+  static String rateCount = "  by  ";
+  static String people = " people.";
 }

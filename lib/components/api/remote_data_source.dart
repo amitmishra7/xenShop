@@ -54,7 +54,6 @@ class RemoteDateSource {
     try {
       Response response =
           await apiRequest.post(endPoint: "carts", data: data);
-      print('Amit response ${response.data.toString()}');
 
       return Future.value(response);
     } catch (err) {

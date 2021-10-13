@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:xen_shop/components/routes/route_paths.dart';
 import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
 import 'package:xen_shop/models/product/product_model.dart';
@@ -21,7 +22,8 @@ class ProductItem extends StatelessWidget {
         Container(
           height: 110.0,
           child: ListTile(
-            onTap: () {},
+            onTap: () { Navigator.pushNamed(context, RoutePaths.ProductDetails,
+                arguments: product);},
             leading: Container(
               height: 75,
               width: 75,
