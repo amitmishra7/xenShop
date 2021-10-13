@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:xen_shop/bloc/category/category_bloc.dart';
 import 'package:xen_shop/bloc/category/category_event.dart';
 import 'package:xen_shop/bloc/category/category_state.dart';
@@ -12,6 +13,7 @@ import 'package:xen_shop/bloc/products/product_state.dart';
 import 'package:xen_shop/components/styles/strings.dart';
 import 'package:xen_shop/components/util/app_constants.dart';
 import 'package:xen_shop/components/widgets/image_loader.dart';
+import 'package:xen_shop/components/widgets/product_item.dart';
 import 'package:xen_shop/models/category/category.dart';
 import 'package:xen_shop/models/product/product.dart';
 
@@ -38,7 +40,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.category),
+        title: Text(widget.category.toUpperCase()),
       ),
       body: _buildBody(),
     );
@@ -80,16 +82,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         padding: const EdgeInsets.all(8),
         itemCount: products.length,
         itemBuilder: (BuildContext context, int index) {
-          return _buildProductItem(products[index]);
+          return ProductItem(product : products[index]);
         });
-  }
-
-  Widget _buildProductItem(Product product) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(product.title),
-      ],
-    );
   }
 }
