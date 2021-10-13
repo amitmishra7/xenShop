@@ -28,4 +28,11 @@ class Strings {
   static String cancel = "CANCEL";
   static String delete = "DELETE";
   static String confirm = "Confirm";
+
+  static String qty = "Qty";
+
+  static String addToCart = 'Add to Cart';
+  static String placeOrder = 'Place Order';
+
+  static var addedToCart = "Your Order Has Placed Successfully";
 }

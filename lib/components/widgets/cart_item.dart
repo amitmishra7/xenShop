@@ -49,9 +49,48 @@ class _CartItemState extends State<CartItem> {
             ),
           );
         } else if (state is ProductDetailsLoaded) {
-          return ProductItem(
-            product: state.product,
-            isFromCart: true,
+          return Stack(
+            children: [
+              ProductItem(
+                product: state.product,
+                isFromCart: true,
+              ),
+              Positioned(
+                bottom: 15,
+                right: 10,
+                child: Row(
+                  children: [
+                    Text(
+                      Strings.qty,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                    ),
+                    SizedBox(width: 5,),
+                    DropdownButton<String>(
+                      underline: SizedBox(),
+                      value: widget.product.quantity.toString(),
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      hint: Text(widget.product.quantity.toString()),
+                      items: [
+                        DropdownMenuItem<String>(value: "1", child: Text('1')),
+                        DropdownMenuItem<String>(value: "2", child: Text('2')),
+                        DropdownMenuItem<String>(value: "3", child: Text('3')),
+                        DropdownMenuItem<String>(value: "4", child: Text('4')),
+                        DropdownMenuItem<String>(value: "5", child: Text('5')),
+                        DropdownMenuItem<String>(value: "6", child: Text('6')),
+                        DropdownMenuItem<String>(value: "7", child: Text('7')),
+                        DropdownMenuItem<String>(value: "8", child: Text('8')),
+                      ],
+                      onChanged: (val) {
+                        setState(() {
+                          widget.product.quantity = int.parse(val);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              )
+            ],
           );
         } else if (state is ProductDetailsError) {
           return Text(state.message);
@@ -61,6 +100,4 @@ class _CartItemState extends State<CartItem> {
       },
     );
   }
-
 }
-
