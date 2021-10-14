@@ -14,22 +14,22 @@
 | Category Listing | &#10004; | Display list of categories in thumbnails and banner |
 | Product Listing | &#10004; | Display list of products as per categories |
 | Product Details | &#10004; | Display individual product details |
-| Add to cart | &#10004; | Add a list og product to cart |
+| Add to cart | &#10004; | Add a list of product to cart |
 | Cart Listing | &#10004; | Display list of product in cart |
 | Checkout | &#10004; | Display success acknowledgement |
 
 # XenShop
 
 **XenShop** is one of online store that exists in Indonesia. To improve the growth for the business, the manager of the store plans to build a mobile application where customers can purchase the products online. The goal of **XenShop**   is to assess mobile engineer's proficiency in software engineering that is related to the daily work that we do at Xendit.
-The purpose of this repository it's for submitting the trial demo to Xendit for internal assessment.
+The purpose of this repository is for submitting the trial demo to Xendit for internal assessment.
 
 ## API Documentation
 
-**XenShop** has been developed using the apis from FakeStoreApi. You can view the api documentaiton from [here](https://fakestoreapi.com/)
+**XenShop** has been developed using the apis from FakeStoreApi. You can view the api documentaiton from [here](https://fakestoreapi.com/docs)
 
 ## Design
 
- **XenShop** is just a demo/trial for internal assessment, hence all the designs are taken from the internet. If you wish to see the images used in the project feel free to navigate to the [assets](https://github.com/amitmishra7/xenShop/tree/development/assets) folder.
+ **XenShop** is just a demo/trial for internal assessment, hence all the designs are taken from the internet. If you wish to see the images used in the project feel free to navigate to the [assets](https://github.com/amitmishra7/xenShop/tree/development/assets) folder. There is a preview of designs in all the sections below.
 
 ## Version
 
@@ -41,11 +41,11 @@ The purpose of this repository it's for submitting the trial demo to Xendit for 
 
 ## Development
 
-**XenShop** is a simple e-commerce domain application developed for internal assessment. Below are the details of each feature described in detail.
+**XenShop** is a simple e-commerce domain application developed for internal assessment. Below are the details of each feature described in detail along with apis and preview.
 
 ### Splash Screen
 
-Splash screen is the initial route of the application which is displayed for 3 seconds everytime the user launches the application.
+Splash screen is the initial route of the application which is displayed for 3 seconds every time the user launches the application.
 
 #### Preview
 
@@ -54,7 +54,7 @@ Splash screen is the initial route of the application which is displayed for 3 s
 
 ### Home Screen
 
-Home screen is launched immediatey after the splash screen. Home screen resembles as the base of the application. All the routes and navigation start and end at home screen. From home screen user can navigate to products listing and cart. Home screen displays the list of categories in thumbnails in the horizontal list and category banners in the vertical list. Assets with the name of category are used to display images.
+Home screen is launched immediately after the splash screen. Home screen resembles as the base of the application. All the routes and navigation start and end at home screen. From home screen user can navigate to products listing and cart. Home screen displays the list of categories in thumbnails in the horizontal list and category banners in the vertical list. Assets with the name of category are used to display images.
 
 #### Preview
 
@@ -77,7 +77,7 @@ https://fakestoreapi.com/products/categories
 
 ### Products Listing
 
-Products are displayed in a vertical listview. The products are fetched on the basis of their categories. The products contains besic information about the product like title, description, image, price, rating etc.
+Products are displayed in a vertical list view. The products are fetched on the basis of their categories. The products contains basic information about the product like title, description, image, price, rating etc.
 
 #### Api Used
 https://fakestoreapi.com/products/category/${categoryName}
@@ -110,7 +110,7 @@ https://fakestoreapi.com/products/category/${categoryName}
 
 ### Product Details
 
-Product Details are displayed on the basis of the producuct information received in the above api. The params that are displayed are shown below.
+Product Details are displayed on the basis of the product information received in the above api. The params that are displayed are shown below.
 
 #### Params Displayed
 ```
