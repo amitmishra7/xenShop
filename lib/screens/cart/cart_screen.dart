@@ -152,35 +152,42 @@ class _CartScreenState extends State<CartScreen> {
             child: SizedBox(
                 height: 25, width: 25, child: CircularProgressIndicator()),
           )
-        : ElevatedButton(
-            onPressed: () {
-              isProgress = true;
-              Map<String, dynamic> data = {
-                "userId": 1,
-                "date": "2020-10-13",
-                "products": productList
-              };
-              cartRepository.addToCart(
-                  data: data,
-                  onSuccess: () {
-                    isProgress = false;
-                    SnackBarUtil.showToast(context, Strings.addedToCart);
-                    Navigator.pop(context);
-                  },
-                  onError: () {
-                    isProgress = false;
-                    SnackBarUtil.showToast(context, Strings.somethingWentWrong);
-                  });
-            },
-            style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 75, vertical: 15),
-                textStyle:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            child: Text(
-              Strings.placeOrder,
-              style: TextStyle(color: Colors.white),
+        : Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  isProgress = true;
+                  Map<String, dynamic> data = {
+                    "userId": 1,
+                    "date": "2020-10-13",
+                    "products": productList
+                  };
+                  cartRepository.addToCart(
+                      data: data,
+                      onSuccess: () {
+                        isProgress = false;
+                        SnackBarUtil.showToast(context, Strings.addedToCart);
+                        Navigator.pop(context);
+                      },
+                      onError: () {
+                        isProgress = false;
+                        SnackBarUtil.showToast(
+                            context, Strings.somethingWentWrong);
+                      });
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: EdgeInsets.all(12),
+                    textStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                child: Text(
+                  Strings.placeOrder,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
-          );
+        );
   }
 }
