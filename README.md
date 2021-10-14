@@ -66,7 +66,66 @@ https://fakestoreapi.com/products/categories
     ]
 ```
 
+### Products Listing
 
+Products are displayed in a vertical listview. The products are fetched on the basis of their categories. The products contains besic information about the product like title, description, image, price, rating etc.
+
+#### Api Used
+https://fakestoreapi.com/products/category/${categoryName}
+#### Response
+```
+[
+    {
+        id:5,
+        title:'...',
+        price:'...',
+        category:'jewelery',
+        description:'...',
+        image:'...'
+    }
+    /*...*/
+    {
+        id:8,
+        title:'...',
+        price:'...',
+        category:'jewelery',
+        description:'...',
+        image:'...'
+    }
+]
+```
+
+### Product Details
+
+Product Details are displayed on the basis of the producuct information received in the above api. The params that are displayed are shown below.
+
+#### Params Displayed
+```
+{
+    id:8,
+    title:'...',
+    price:'...',
+    category:'jewelery',
+    description:'...',
+    image:'...'
+}
+```
+
+### Cart Listing
+
+Cart is displayed in a vertical list view. Product items displayed in the product listing is very much similar in here. The only difference being is that the rating bar is replaced with the quantity selection in cart list. The products array in the response consists of an array of objects containing productId and quantity.
+
+#### Api Used
+https://fakestoreapi.com/carts/${userId} (Consider userId : 1 for now)
+#### Response
+```
+{
+    id:5,
+    userId:1,
+    date:...,
+    products:[...]
+}
+```
 ## Important:
 
 This repository is only for internal assessment of mobile engineers for Xendit. Please do not misuse it.
