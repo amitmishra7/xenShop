@@ -47,9 +47,18 @@ The purpose of this repository it's for submitting the trial demo to Xendit for 
 
 Splash screen is the initial route of the application which is displayed for 3 seconds everytime the user launches the application.
 
+#### Preview
+
+<img src="assets/preview_splash.png" width= 200/>
+
+
 ### Home Screen
 
 Home screen is launched immediatey after the splash screen. Home screen resembles as the base of the application. All the routes and navigation start and end at home screen. From home screen user can navigate to products listing and cart. Home screen displays the list of categories in thumbnails in the horizontal list and category banners in the vertical list. Assets with the name of category are used to display images.
+
+#### Preview
+
+<img src="assets/preview_home.png" width= 200/>
 
 ### Category Listing
 
@@ -95,6 +104,10 @@ https://fakestoreapi.com/products/category/${categoryName}
 ]
 ```
 
+#### Preview
+
+<img src="assets/preview_products.png" width= 200/>
+
 ### Product Details
 
 Product Details are displayed on the basis of the producuct information received in the above api. The params that are displayed are shown below.
@@ -111,6 +124,10 @@ Product Details are displayed on the basis of the producuct information received
 }
 ```
 
+#### Preview
+
+<img src="assets/preview_product_details.png" width= 200/>
+
 ### Cart Listing
 
 Cart is displayed in a vertical list view. Product items displayed in the product listing is very much similar in here. The only difference being is that the rating bar is replaced with the quantity selection in cart list. The products array in the response consists of an array of objects containing productId and quantity.
@@ -126,6 +143,53 @@ https://fakestoreapi.com/carts/${userId} (Consider userId : 1 for now)
     products:[...]
 }
 ```
+
+#### Preview
+
+<img src="assets/preview_cart.png" width= 200/>
+
+### Add to Cart
+
+Add to cart functionality allows users to add their items to cart and proceed to checkout. The items are posted in an api in a json map. The map consists of product id and product quantity in an array. Along with this userId, date etc are params posted in the map. It also displays a summary of prices which is static for now. 
+
+#### Api Used
+https://fakestoreapi.com/carts/
+
+#### Request - POST
+```
+{
+    userId:5,
+    date:2020-02-03,
+    products:[{productId:5,quantity:1},{productId:1,quantity:5}]
+}
+```
+#### Response
+```
+{
+    id:21
+    userId:5,
+    date:2020-02-03,
+    products:[{productId:5,quantity:1},{productId:1,quantity:5}]
+}
+```
+
+#### Preview
+
+<img src="assets/preview_cart.png" width= 200/>
+
+### Checkout Page
+
+Checkout page is completely static. It depends on the success response of the above api. On receiving successful response from above api, app is navigated to this page. It show user acknowledgement that his transaction was successful and allows him option to continue shopping.
+
+#### Preview
+
+<img src="assets/preview_success.png" width= 200/>
+
+## Notes
+
+In FakeStoreApi, on a post request it will return you an object with a new id. The point to remember that nothing in real will insert into the database. so if you want to access the new id you will get a 404 error. 
+
+
 ## Important:
 
 This repository is only for internal assessment of mobile engineers for Xendit. Please do not misuse it.
