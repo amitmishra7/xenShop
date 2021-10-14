@@ -32,6 +32,7 @@ class Strings {
   static String qty = "Qty";
 
   static String addToCart = 'Add to Cart';
+  static String continueShopping = 'Continue Shopping';
   static String placeOrder = 'Place Order';
 
   static var addedToCart = "Your Order Has Placed Successfully";
@@ -40,4 +41,5 @@ class Strings {
 
   static String rateCount = "Voted by ";
   static String people = " people.";
+  static String paymentSuccess = "Your payment is complete.\nPlease check the delivery status in the \nOrder Tracking page.";
 }
