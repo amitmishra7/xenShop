@@ -9,7 +9,7 @@ import 'package:xen_shop/models/product/product_model.dart';
 class ProductItem extends StatelessWidget {
   final ProductModel product;
 
-  /// default value as false to hide increment decrement icons
+  /// default value as false to hide rating bar
   final bool isFromCart;
 
   ProductItem({this.product, this.isFromCart = false});
@@ -20,8 +20,10 @@ class ProductItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
-          onTap: () { Navigator.pushNamed(context, RoutePaths.ProductDetails,
-              arguments: product);},
+          onTap: () {
+            Navigator.pushNamed(context, RoutePaths.ProductDetails,
+                arguments: product);
+          },
           leading: Container(
             height: 75,
             width: 75,
@@ -63,7 +65,8 @@ class ProductItem extends StatelessWidget {
                   ),
                   !isFromCart
                       ? RatingBar.builder(
-                          initialRating: double.parse(product.rating.rate.toString()),
+                          initialRating:
+                              double.parse(product.rating.rate.toString()),
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,

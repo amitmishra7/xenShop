@@ -6,6 +6,7 @@ import 'package:xen_shop/screens/home/home_screen.dart';
 import 'package:xen_shop/screens/products/products_screen.dart';
 import 'package:xen_shop/screens/products_details/products_details_screen.dart';
 import 'package:xen_shop/screens/splashscreen/splashscreen.dart';
+import 'package:xen_shop/screens/success_page/success_screen.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,6 +19,8 @@ class Router {
         return CupertinoPageRoute(builder: (_) => ProductsScreen(settings.arguments));
       case RoutePaths.Cart:
         return CupertinoPageRoute(builder: (_) => CartScreen());
+        case RoutePaths.Success:
+        return CupertinoPageRoute(builder: (_) => SuccessScreen());
       case RoutePaths.ProductDetails:
         return CupertinoPageRoute(builder: (_) => ProductDetailsScreen(settings.arguments));
       default:

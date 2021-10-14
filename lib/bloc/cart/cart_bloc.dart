@@ -21,10 +21,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (event is GetCart) {
       try {
         final cart = await repository.fetchCart();
-        yield CartLoaded(cart);
+        yield CartLoaded(cart.products);
       } on NetworkError catch (networkError) {
         yield CartError(repository.parseError(networkError.message));
       }
+    } else if (event is UpdateCart) {
+      yield CartLoaded(event.cartList);
     }
   }
 }

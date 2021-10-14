@@ -24,6 +24,7 @@ class CartItem extends StatefulWidget {
 
 class _CartItemState extends State<CartItem> {
   ProductDetailsBloc productDetailsBloc;
+  List<String> quantitySelection = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
   @override
   void initState() {
@@ -65,25 +66,22 @@ class _CartItemState extends State<CartItem> {
                       style:
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
                     ),
-                    SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     DropdownButton<String>(
                       underline: SizedBox(),
                       value: widget.product.quantity.toString(),
                       icon: Icon(Icons.keyboard_arrow_down),
                       hint: Text(widget.product.quantity.toString()),
-                      items: [
-                        DropdownMenuItem<String>(value: "1", child: Text('1')),
-                        DropdownMenuItem<String>(value: "2", child: Text('2')),
-                        DropdownMenuItem<String>(value: "3", child: Text('3')),
-                        DropdownMenuItem<String>(value: "4", child: Text('4')),
-                        DropdownMenuItem<String>(value: "5", child: Text('5')),
-                        DropdownMenuItem<String>(value: "6", child: Text('6')),
-                        DropdownMenuItem<String>(value: "7", child: Text('7')),
-                        DropdownMenuItem<String>(value: "8", child: Text('8')),
-                      ],
+                      items: quantitySelection
+                          .map((value) => DropdownMenuItem<String>(
+                              value: value, child: Text(value)))
+                          .toList(),
                       onChanged: (val) {
                         setState(() {
                           widget.product.quantity = int.parse(val);
+
                         });
                       },
                     ),
