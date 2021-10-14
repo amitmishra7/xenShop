@@ -41,8 +41,9 @@ class CartModel extends Equatable {
 class Products extends Equatable {
   int productId;
   int quantity;
+  num productPrice;
 
-  Products({this.productId, this.quantity});
+  Products({this.productId, this.quantity,this.productPrice});
 
   Products.fromJson(Map<String, dynamic> json) {
     productId = json['productId'];

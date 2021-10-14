@@ -23,12 +23,12 @@ class _CartScreenState extends State<CartScreen> {
   CartBloc cartBloc;
   ProductRepository productRepository = ProductRepository();
   CartRepository cartRepository = CartRepository();
+  bool isProgress = false;
 
   @override
   void initState() {
     cartBloc = BlocProvider.of<CartBloc>(context);
     cartBloc.add(GetCart());
-
     super.initState();
   }
 
@@ -60,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
                 height: 25, width: 25, child: CircularProgressIndicator()),
           );
         } else if (state is CartLoaded) {
-          return _buildCartListing(state.cart.products);
+          return _buildCartListing(state.cartList);
         } else if (state is CartError) {
           return Text(state.message);
         } else {
@@ -121,6 +121,7 @@ class _CartScreenState extends State<CartScreen> {
               },
             ),
           ),
+          _buildSummary(productList),
           _buildOrderButton(productList),
         ],
       );
@@ -145,20 +146,95 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  Widget _buildSummary(List<Products> productList) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  'Sub Total',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                )),
+                Text(
+                  'Rs. 195',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  'Delivery Fee',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                )),
+                Text(
+                  'Rs. 200',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  'Taxes',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                )),
+                Text(
+                  'Rs. 20',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  'Total',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                )),
+                Text(
+                  'Rs. 2000',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildOrderButton(List<Products> productList) {
-    bool isProgress = false;
     return isProgress
         ? Center(
             child: SizedBox(
                 height: 25, width: 25, child: CircularProgressIndicator()),
           )
         : Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Container(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  isProgress = true;
+                  setState(() {
+                    isProgress = true;
+                  });
                   Map<String, dynamic> data = {
                     "userId": 1,
                     "date": "2020-10-13",
@@ -167,12 +243,18 @@ class _CartScreenState extends State<CartScreen> {
                   cartRepository.addToCart(
                       data: data,
                       onSuccess: () {
-                        isProgress = false;
+                        setState(() {
+                          isProgress = false;
+                        });
+
                         SnackBarUtil.showToast(context, Strings.addedToCart);
                         Navigator.pop(context);
                       },
                       onError: () {
-                        isProgress = false;
+                        setState(() {
+                          isProgress = false;
+                        });
+
                         SnackBarUtil.showToast(
                             context, Strings.somethingWentWrong);
                       });
@@ -188,6 +270,6 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
             ),
-        );
+          );
   }
 }
