@@ -56,7 +56,7 @@ class _CartItemState extends State<CartItem> {
                 isFromCart: true,
               ),
               Positioned(
-                bottom: 15,
+                bottom: 0,
                 right: 10,
                 child: Row(
                   children: [

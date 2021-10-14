@@ -49,7 +49,7 @@ class ProductModel extends Equatable {
 }
 
 class Rating extends Equatable {
-  double rate;
+  num rate;
   int count;
 
   Rating({this.rate, this.count});

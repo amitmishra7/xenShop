@@ -12,14 +12,14 @@ class ProductRepository extends BaseRepository {
   RemoteDateSource remoteDateSource = RemoteDateSource();
 
   Future<List<ProductModel>> fetchProducts(String category) async {
-    try {
+   /* try {*/
       Response response = await remoteDateSource.getProducts(category);
       return response.data
           .map<ProductModel>((json) => ProductModel.fromJson(json))
           .toList();
-    } catch (err) {
+    /*} catch (err) {
       throw NetworkError(err);
-    }
+    }*/
   }
 
   Future<ProductModel> fetchProductDetails(int id) async {

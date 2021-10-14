@@ -38,6 +38,6 @@ class Strings {
 
   static String productDetails = "Product Details";
 
-  static String rateCount = "  by  ";
+  static String rateCount = "Voted by ";
   static String people = " people.";
 }
