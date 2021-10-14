@@ -7,6 +7,7 @@ import 'package:xen_shop/bloc/cart/cart_bloc.dart';
 import 'package:xen_shop/bloc/cart/cart_event.dart';
 import 'package:xen_shop/bloc/cart/cart_state.dart';
 import 'package:xen_shop/bloc/product_details/product_details_bloc.dart';
+import 'package:xen_shop/components/routes/route_paths.dart';
 import 'package:xen_shop/components/styles/strings.dart';
 import 'package:xen_shop/components/widgets/cart_item.dart';
 import 'package:xen_shop/components/widgets/snack_bar_util.dart';
@@ -246,9 +247,7 @@ class _CartScreenState extends State<CartScreen> {
                         setState(() {
                           isProgress = false;
                         });
-
-                        SnackBarUtil.showToast(context, Strings.addedToCart);
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context,RoutePaths.Success);
                       },
                       onError: () {
                         setState(() {
